@@ -82,4 +82,32 @@ public class PaymentController {
         }
         return serverPort;
     }
+
+
+    @GetMapping(value = "/payment/hystrix/ok/{id}")
+    public String paymentInfoOK(@PathVariable("id") Long id) {
+        String result = paymentService.paymentInfoOK(id);
+        log.info("******Result: " + result);
+        return result;
+    }
+
+    @GetMapping(value = "/payment/hystrix/timeout/{id}")
+    public String paymentInfoTimeout(@PathVariable("id") Long id) {
+        String result = paymentService.paymentInfoTimeout(id);
+        log.info("******Result: " + result);
+        return result;
+    }
+
+    /**
+     * 服务熔断
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/payment/circuit/{id}")
+    public String paymentCircuitBreaker(@PathVariable("id") Integer id) {
+        String result = paymentService.paymentCircuitBreaker(id);
+        log.info("****result: " + result);
+        return result;
+    }
 }
