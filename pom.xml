@@ -17,7 +17,8 @@
         <module>cloud-provider-hystrix-payment8001</module>
         <module>cloud-consumer-feign-hystrix-order80</module>
         <module>cloud-consumer-hystrix-dashboard9001</module>
-    </modules>
+		<module>cloud-gateway-gateway9527</module>
+	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
