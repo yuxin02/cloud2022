@@ -16,9 +16,9 @@ spring:
   rabbitmq:
     host: 127.0.0.1
     port: 5672 #（端口）
-    username: center #（用户名）
+    username: donnie #（用户名）
     password: 123456 #（密码）
-#    virtual-host: ecosphere
+    virtual-host: center
 
 eureka:
   client:
@@ -27,3 +27,12 @@ eureka:
 
 # docker run -d --hostname my-rabbit --name rabbit -p 15672:15672 -p 5672:5672 -e RABBITMQ_DEFAULT_USER=center \
 #  -e RABBITMQ_DEFAULT_PASS=123345 -e RABBITMQ_DEFAULT_VHOST=center  rabbitmq:management
+##rabbitmq相关配置,暴露bus刷新配置的端点 SpringCloud Bus动态刷新全局广播
+# curl -X POST "http://localhost:3344/actuator/bus-refresh"
+# curl -X POST "http://localhost:3344/actuator/bus-refresh/config-client:3355"
+management:
+  endpoints: #暴露bus刷新配置的端点
+    web:
+      exposure:
+        include: 'bus-refresh'
+
