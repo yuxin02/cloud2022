@@ -1,0 +1,29 @@
+server:
+  port: 3344
+
+spring:
+  application:
+    name: cloud-config-center #注册进Eureka服务器的微服务名
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/yuxin02/springcloud-config.git #GitHub上面的git仓库名字
+          search-paths: #搜索目录
+            - springcloud-config
+      label: main #读取分支
+      #启动成功后访问的路径 http://ip:3344/{label}/{application}-{profile}.yml 能访问的配置文件 就表示成功了
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672 #（端口）
+    username: center #（用户名）
+    password: 123456 #（密码）
+#    virtual-host: ecosphere
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+
+# docker run -d --hostname my-rabbit --name rabbit -p 15672:15672 -p 5672:5672 -e RABBITMQ_DEFAULT_USER=center \
+#  -e RABBITMQ_DEFAULT_PASS=123345 -e RABBITMQ_DEFAULT_VHOST=center  rabbitmq:management
